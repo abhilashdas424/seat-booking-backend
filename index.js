@@ -2,6 +2,7 @@
 
 console.log(`Hello Node.js v${process.versions.node}!`);
 
+require('dotenv').config();
 const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
@@ -12,12 +13,11 @@ app.use(express.json());
 
 // MySQL connection setup
 const db = mysql.createConnection({
-  host: '127.0.0.1',
-  user: 'root',
-  password: 'ranapay',
-  database: 'train_booking',
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
 });
-
 // Initialize database
 db.connect((err) => {
   if (err) {
